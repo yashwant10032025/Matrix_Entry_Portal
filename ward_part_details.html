@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ward Part Details</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #5b67e8; /* Navbar blue */
+            --btn-blue: #3B82F6;
+            --btn-green: #10B981;
+            --btn-yellow: #FBBF24;
+            --btn-red: #EF4444;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --table-header: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .navbar-brand .logo {
+            background: white;
+            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--text-main);
+            font-size: 22px;
+        }
+
+        .navbar-user {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: right;
+            line-height: 1.2;
+        }
+        
+        .navbar-user .avatar {
+            background: #9ca3af;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            margin-left: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        /* Main Container */
+        .container {
+            padding: 1.5rem;
+            margin: 0 auto;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #F9FAFB;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            color: white;
+        }
+
+        .btn:hover { opacity: 0.9; }
+        .btn-primary { background-color: var(--btn-blue); }
+        .btn-warning { background-color: var(--btn-yellow); color: #111827; font-weight: 600;}
+        .btn-success { background-color: var(--btn-green); }
+        .btn-danger { background-color: var(--btn-red); }
+        
+        .btn-sm {
+            padding: 0.35rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+
+        thead {
+            background-color: var(--table-header);
+        }
+
+        th {
+            padding: 1.2rem 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid #f3f4f6;
+            vertical-align: bottom;
+            line-height: 1.4;
+        }
+        
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid #f3f4f6;
+            vertical-align: middle;
+            color: #374151;
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+
+        tbody tr:hover { background-color: #F9FAFB; }
+
+        /* Inputs */
+        .form-control {
+            padding: 0.45rem 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            width: 70px;
+            outline: none;
+            transition: border-color 0.2s;
+            color: #374151;
+        }
+
+        .form-control:focus {
+            border-color: var(--btn-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-control::placeholder {
+            color: #9CA3AF;
+        }
+
+        .action-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 75px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="logo"><i class="fas fa-layer-group"></i></div>
+            State Election Commission, U.T. Chandigarh
+        </div>
+        <div class="navbar-user">
+            <div>
+                <div>RO</div>
+                <div style="font-size: 0.8rem; font-weight: 400; opacity: 0.9;">Chandigarh</div>
+            </div>
+            <div class="avatar"><i class="fas fa-bars"></i></div>
+            <i class="fas fa-sign-out-alt" style="margin-left: 15px; font-size: 1.2rem; cursor: pointer;" title="Logout" onclick="logout()"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-folder" style="color: #9CA3AF; font-size: 1.3rem;"></i> Ward 1 Part 1 Details
+                </h2>
+                <div class="card-actions">
+                    <button class="btn btn-danger" onclick="window.location.href='split_wards_parts.html'">Back</button>
+                    <button class="btn btn-success" onclick="finalSubmit()">Final Submit</button>
+                    <button class="btn btn-warning" onclick="window.open('ACNo_1_PartNo_1.xlsx', '_blank')">Export To Excel</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table id="partsTable">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Assembly<br>Part No.</th>
+                            <th>Section No.</th>
+                            <th>Current<br>S.No. Start</th>
+                            <th>Current<br>S.No. End</th>
+                            <th>S.No. Start</th>
+                            <th>S.No. End</th>
+                            <th>Area No.</th>
+                            <th>New Part<br>No.</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Rows dynamically injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('selectedWard');
+            window.location.href = 'login.html';
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const sourceId = urlParams.get('id');
+        const selectedWard = localStorage.getItem('selectedWard') || 'Ward';
+        
+        if(sourceId) {
+            document.querySelector('.card-title').innerHTML = `<i class="fas fa-folder" style="color: #9CA3AF; font-size: 1.3rem;"></i> ${selectedWard} Part Details (AC Part ID: ${sourceId})`;
+        } else {
+            document.querySelector('.card-title').innerHTML = `<i class="fas fa-folder" style="color: #9CA3AF; font-size: 1.3rem;"></i> ${selectedWard} Part Details`;
+        }
+
+        let data = [
+            { id: 1, sNo: 1, assemblyPartNo: 1, sectionNo: 1, currentSNoStart: 1, currentSNoEnd: 211, sNoStart: 1, sNoEnd: 211, areaNo: 1, newPartNo: 15 },
+            { id: 2, sNo: 2, assemblyPartNo: 1, sectionNo: 2, currentSNoStart: 212, currentSNoEnd: 303, sNoStart: 212, sNoEnd: 303, areaNo: 1, newPartNo: 15 }
+        ];
+
+        function finalSubmit() {
+            if(sourceId) {
+                let mainData = JSON.parse(localStorage.getItem('wardData')) || [];
+                let rowIdx = mainData.findIndex(r => r.id == sourceId);
+                if(rowIdx !== -1) {
+                    mainData[rowIdx].error = 'Final Submitted';
+                    mainData[rowIdx].isError = false;
+                    localStorage.setItem('wardData', JSON.stringify(mainData));
+                }
+            }
+            alert('Final Submitted Successfully!');
+            window.location.href = 'split_wards_parts.html';
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                
+                tr.innerHTML = `
+                    <td>${row.sNo}</td>
+                    <td>${row.assemblyPartNo}</td>
+                    <td>${row.sectionNo}</td>
+                    <td>${row.currentSNoStart}</td>
+                    <td>${row.currentSNoEnd}</td>
+                    <td>
+                        <input type="text" class="form-control" value="${row.sNoStart}" id="start_${row.id}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="${row.sNoEnd}" id="end_${row.id}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="${row.areaNo}" id="area_${row.id}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="${row.newPartNo}" id="newPart_${row.id}">
+                    </td>
+                    <td>
+                        <div class="action-cell">
+                            <button class="btn btn-primary btn-sm" onclick="updateRow(${row.id})">Update</button>
+                            <button class="btn btn-danger btn-sm" onclick="resetRow(${row.id})">Reset</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Action Handlers
+        window.updateRow = function(id) {
+            const startInput = document.getElementById(`start_${id}`).value;
+            const endInput = document.getElementById(`end_${id}`).value;
+            const areaInput = document.getElementById(`area_${id}`).value;
+            const newPartInput = document.getElementById(`newPart_${id}`).value;
+            
+            const rowIndex = data.findIndex(r => r.id === id);
+            if(rowIndex !== -1) {
+                data[rowIndex].sNoStart = startInput;
+                data[rowIndex].sNoEnd = endInput;
+                data[rowIndex].areaNo = areaInput;
+                data[rowIndex].newPartNo = newPartInput;
+                
+                alert('Row ' + data[rowIndex].sNo + ' Updated Successfully!');
+                renderTable();
+            }
+        };
+
+        window.resetRow = function(id) {
+            const rowIndex = data.findIndex(r => r.id === id);
+            if(rowIndex !== -1) {
+                // Reset to default "Current" values for S.No and original values for Area/Part
+                data[rowIndex].sNoStart = data[rowIndex].currentSNoStart;
+                data[rowIndex].sNoEnd = data[rowIndex].currentSNoEnd;
+                data[rowIndex].areaNo = 1;
+                data[rowIndex].newPartNo = 15;
+                
+                renderTable();
+            }
+        };
+
+        // Initial render
+        renderTable();
+    </script>
+</body>
+</html>
